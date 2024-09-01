@@ -1,11 +1,17 @@
 package com.project;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         Cuisine cuisine =new Cuisine();
         Cost cost = new Cost();
         cost.setCuisineCost(120.0);
@@ -71,7 +77,15 @@ public class Application {
         bookTable.setPeopleCount(10);
         bookTable.setRestaurant(restaurant6);
         bookTable.setUserInfo(userInfo);
-        System.out.println("Booked Table Succesfully"+ bookTable.toString());
+        System.out.println("Booked Table Succesfully "+ bookTable.toString());
+        byte[] b= "hello world".getBytes();
+        String s=new String(b);
+        System.out.println("Converted "+s);
+        SecretKey secretKey ;
+        KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+        secretKey = keyGen.generateKey();
+        Cipher cipher=Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE,secretKey);
 
 
     }
